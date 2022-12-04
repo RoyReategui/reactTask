@@ -9,7 +9,7 @@ const stylePrioridad = {
 
 export const Card = ({id,titulo, descripcion, responsable, prioridad, deleteTodo}) => {
   return (
-    <div className='relative shadow-md shadow-sky-200 rounded-lg  flex flex-col max-h-[220px]'>
+    <div className='relative shadow-md shadow-sky-200 rounded-lg  flex flex-col border border-sky-600'>
         <header className='bg-sky-100 rounded-t-lg py-4 px-2 text-center'>
             <h2 className='text-2xl text-sky-600 font-light mt-2'>{ titulo }</h2>
             <span 
@@ -21,7 +21,7 @@ export const Card = ({id,titulo, descripcion, responsable, prioridad, deleteTodo
             <p className='text-wrap flex-1 text-base font-light'>{ descripcion }</p>
             <p className='text-center text-lg font-semibold text-sky-500'>{ responsable }</p>
         </div>
-        <div className='py-3 bg-sky-100 flex justify-center w-full rounded-b-lg'>
+        <div className=' bg-sky-100 flex justify-center w-full rounded-b-lg py-5'>
             <button 
                 onClick={ ()=> { deleteTodo(id) } }
                 className='py-1.5 px-3 bg-red-400 hover:bg-red-500  text-red-50 rounded-md'>

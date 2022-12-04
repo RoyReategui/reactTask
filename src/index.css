@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+    --heigh-header:  4rem;
+}
+
+
+@layer components{
+    .header{
+        @apply shadow-md bg-gray-700 text-gray-200 flex items-center;
+        height: var( --heigh-header );
+    }
+
+    .main-content{
+        @apply flex flex-col md:flex-row gap-5 container my-5;
+        /* height: calc( 100vh - var(--heigh-header) ) ; */
+    }
+}
 
 @layer utilities{
     .text-wrap{
