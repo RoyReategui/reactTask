@@ -17,6 +17,10 @@
         @apply flex flex-col md:flex-row gap-5 container my-5;
         /* height: calc( 100vh - var(--heigh-header) ) ; */
     }
+    .required::after{
+        content: '*';
+        @apply text-red-500
+    }
 }
 
 @layer utilities{

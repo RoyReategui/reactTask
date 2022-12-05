@@ -2,7 +2,6 @@ import { Card } from "./Card"
 
 export const GridCard = ({ className, todos, deleteTodo }) => {
 
-    console.log(todos);
     return (
         <div className={`${ className }`} >
             { 
