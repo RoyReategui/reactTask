@@ -23,18 +23,40 @@ const state = {
 
 }
 
+const initialTodo = {
+  titulo:'',
+  responsable:'',
+  descripcion:'',
+  prioridad: 'seleccione',
+}
+
 export const App = () => {
 
   const [todosState, settodosState] = useState(state)
   const [todoDelete, setTodoDelete] = useState(null)
+  const [initialStateTodo, setinitialStateTodo] = useState(initialTodo)
 
-  const addTodo = ( todo )=>{
+  const addTodo = ( todo, isEdit )=>{
 
-    settodosState( {
-      ...todosState,
-      todos:[...todosState.todos, todo],
-      total: todosState.todos.length+1
-    })
+    if(!isEdit){
+      settodosState( {
+        ...todosState,
+        todos:[...todosState.todos, todo],
+        total: todosState.todos.length+1
+      })
+
+    }else{
+        settodosState({
+        ...todosState,
+        todos:todosState.todos.map(ele =>{
+                            if(ele.id === todo.id){
+                              return todo;
+                            }
+                            return ele
+                          })
+      })
+    }
+    
   }
 
   useEffect(() => {
@@ -49,24 +71,28 @@ export const App = () => {
   const handleDeleteTodo = ( id )=>{
     setTodoDelete(null)
     if(!id)return;
-    
     settodosState( {
       ...todosState,
       todos: todosState.todos.filter( ele => ele.id !== id ),
       total: todosState.todos.length-1
     })
+    setinitialStateTodo(initialTodo)
   }
 
+  const preEdit = (todo) =>{
+     setinitialStateTodo(todo)
+  }
 
   return (
     <>
       <div className='bg-gradient-to-t from-gray-200 to-gray-300 min-h-screen'>
           <Header total={ todosState.total } > Task manager </Header>
           <div className='main-content'> 
-              <Formulario addTodo={ addTodo } className='lg:w-[350px]' />
+              <Formulario addTodo={ addTodo } className='md:w-[350px]' initialStateTodo={ initialStateTodo } />
               <GridCard 
               todos = { todosState.todos }  
               confirmDeleteTodo={ confirmDeleteTodo }
+              preEdit ={ preEdit }
               className='w-full min-h-[220px] flex-1 overflow-auto grid gap-3 grid-cols-[repeat(auto-fit,minmax(180px,1fr))]'/> 
           </div>
       </div>

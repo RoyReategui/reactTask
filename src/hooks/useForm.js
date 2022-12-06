@@ -36,8 +36,13 @@ export const useForm = (initalState={}, validationForm={}) => {
 
 
     const resetForm = ()=>{
-        setformState(initalState)
+        setformState({
+            titulo:'',
+            responsable:'',
+            descripcion:'',
+            prioridad: 'seleccione',
+          })
     }
 
-    return {formState, onInputChange, resetForm, ...formState, ...stateValidation, isFormValid }
+    return {formState, onInputChange, resetForm, setformState, ...formState, ...stateValidation, isFormValid }
 }

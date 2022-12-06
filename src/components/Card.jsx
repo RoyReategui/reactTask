@@ -5,7 +5,7 @@ const stylePrioridad = {
 }
 
 
-export const Card = ({id,titulo, descripcion, responsable, prioridad, confirmDeleteTodo}) => {
+export const Card = ({id,titulo, descripcion, responsable, prioridad, confirmDeleteTodo, preEdit}) => {
   return (
     <div className='relative shadow-md shadow-sky-200 rounded-lg  flex flex-col border border-sky-600'>
         <header className='bg-sky-100 rounded-t-lg py-4 px-2 text-center'>
@@ -25,6 +25,13 @@ export const Card = ({id,titulo, descripcion, responsable, prioridad, confirmDel
                 className='py-1.5 px-3 bg-red-400 hover:bg-red-500  text-red-50 rounded-md'>
                 Delete
             </button>
+
+            <button 
+                onClick={ ()=> { preEdit({ id, titulo, responsable, descripcion, prioridad}) } }
+                className='ml-3 py-1.5 px-3 bg-purple-400 hover:bg-purple-500  text-purple-50 rounded-md'>
+                Editar
+            </button>
+
         </div>
     </div>
   )

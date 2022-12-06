@@ -1,13 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "../hooks/useForm"
 import { randomId } from "../utility/utility";
 
-const initalState = {
-    titulo:'',
-    responsable:'',
-    descripcion:'',
-    prioridad: 'seleccione',
-}
 
 const validationForm = {
     titulo : [(value='')=> value.length >=3, 'El titulo tiene que tener minimo 3 caracteres'],
@@ -21,32 +15,41 @@ const MessaError = ({children, flag }) =>{
     else null
 }
 
-export const Formulario = ({className, addTodo}) => {
 
-    //Se intento agregar una tarea ?? 
+export const Formulario = ({ className, addTodo, initialStateTodo }) => {
+
+    //Se intento agregar una tarea ?? - Para mostrar los mensajes de error
     const [isAddTodo, setisAddTodo] = useState(false)
-   
+
     const{ isFormValid, tituloValues, responsableValues,prioridadValues,
         titulo,responsable,descripcion,prioridad,
-        formState,onInputChange, resetForm} =  useForm (initalState,validationForm)
- 
+        formState,onInputChange, resetForm, setformState} =  useForm (initialStateTodo,validationForm)
+
+    useEffect(() => {
+        setformState(initialStateTodo)  
+    }, [initialStateTodo])
+    
     const handleChange = (e)=>{
         e.preventDefault();
         setisAddTodo(true)
+
         if(!isFormValid) return;
-                const newTodo = {
+
+        const isEdit = (formState.id)? true: false;
+        const newTodo = {
             ...formState,
-            id: randomId(),
+            id: formState.id?? randomId(),
             completed:false
         }
-        addTodo(newTodo)
+
+        addTodo(newTodo, isEdit)
         resetForm();
         setisAddTodo(false)
     }
 
     return (
         <div className={`${className}`}>
-            <div className="w-full lg:w-[350px] lg:fixed">
+            <div className="w-full md:w-[350px] md:fixed">
                 
                 <form className='px-4 w-[inherit] py-10 shadow-lg rounded-lg bg-white space-y-5'>
                     <div>
@@ -96,12 +99,22 @@ export const Formulario = ({className, addTodo}) => {
                         <MessaError flag={ isAddTodo && isAddTodo  } > { prioridadValues } </MessaError>
                         
                     </div>
-                    <button 
-                        // disabled={ !isFormValid }
-                        onClick={ handleChange }
-                        className='bg-sky-600 text-sky-100 p-4 py-2 rounded-md enabled:hover:bg-sky-700 w-full enabled:hover:cursor-pointer disabled:opacity-50 '>
-                        Agregar 
-                    </button>
+
+                    { (formState.id) ?
+                            <button // disabled={ !isFormValid }
+                                onClick={ handleChange }
+                                className='bg-yellow-600 text-yellow-100 p-4 py-2 rounded-md enabled:hover:bg-yellow-700 w-full enabled:hover:cursor-pointer disabled:opacity-50 '>
+                                    Editar
+                            </button> : 
+
+                            <button // disabled={ !isFormValid }
+                                onClick={ handleChange }
+                                className='bg-sky-600 text-sky-100 p-4 py-2 rounded-md enabled:hover:bg-sky-700 w-full enabled:hover:cursor-pointer disabled:opacity-50 '>
+                                    Agregar
+                            </button>
+                        
+                    }
+                    
                 </form>
             </div>
         </div>

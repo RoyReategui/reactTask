@@ -1,6 +1,6 @@
 import { Card } from "./Card"
 
-export const GridCard = ({ className, todos, confirmDeleteTodo }) => {
+export const GridCard = ({ className, todos, confirmDeleteTodo, preEdit }) => {
 
     return (
         <div className={`${ className }`} >
@@ -22,6 +22,7 @@ export const GridCard = ({ className, todos, confirmDeleteTodo }) => {
                         responsable={ responsable }
                         prioridad={ prioridad } 
                         confirmDeleteTodo={ confirmDeleteTodo }
+                        preEdit={ preEdit }
                         />
                 ))
             }
