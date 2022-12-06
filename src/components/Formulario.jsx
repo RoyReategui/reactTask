@@ -21,9 +21,9 @@ const MessaError = ({children, flag }) =>{
     else null
 }
 
-
 export const Formulario = ({className, addTodo}) => {
 
+    //Se intento agregar una tarea ?? 
     const [isAddTodo, setisAddTodo] = useState(false)
    
     const{ isFormValid, tituloValues, responsableValues,prioridadValues,
@@ -34,8 +34,7 @@ export const Formulario = ({className, addTodo}) => {
         e.preventDefault();
         setisAddTodo(true)
         if(!isFormValid) return;
-        
-        const newTodo = {
+                const newTodo = {
             ...formState,
             id: randomId(),
             completed:false
@@ -59,8 +58,6 @@ export const Formulario = ({className, addTodo}) => {
                             onChange= { onInputChange }
                             placeholder='Nueva Tarea'
                         />
-                        {    }
-
                         <MessaError flag={ isAddTodo && isAddTodo  } > { tituloValues } </MessaError>
                     </div> 
                     <div>

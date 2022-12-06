@@ -1,5 +1,3 @@
-import React from 'react'
-
 const stylePrioridad = {
     'baja': 'bg-green-400',
     'media':'bg-yellow-400',
@@ -7,7 +5,7 @@ const stylePrioridad = {
 }
 
 
-export const Card = ({id,titulo, descripcion, responsable, prioridad, deleteTodo}) => {
+export const Card = ({id,titulo, descripcion, responsable, prioridad, confirmDeleteTodo}) => {
   return (
     <div className='relative shadow-md shadow-sky-200 rounded-lg  flex flex-col border border-sky-600'>
         <header className='bg-sky-100 rounded-t-lg py-4 px-2 text-center'>
@@ -23,11 +21,10 @@ export const Card = ({id,titulo, descripcion, responsable, prioridad, deleteTodo
         </div>
         <div className=' bg-sky-100 flex justify-center w-full rounded-b-lg py-5'>
             <button 
-                onClick={ ()=> { deleteTodo(id) } }
+                onClick={ ()=> { confirmDeleteTodo({ id, titulo}) } }
                 className='py-1.5 px-3 bg-red-400 hover:bg-red-500  text-red-50 rounded-md'>
                 Delete
             </button>
-
         </div>
     </div>
   )

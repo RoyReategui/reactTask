@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { Formulario, GridCard, Header } from './components'
+import { Formulario, GridCard, Header, WrapperConfirm } from './components'
 
 
 const intitTodos =  JSON.parse( localStorage.getItem('tasks') ) || [];
@@ -26,6 +26,7 @@ const state = {
 export const App = () => {
 
   const [todosState, settodosState] = useState(state)
+  const [todoDelete, setTodoDelete] = useState(null)
 
   const addTodo = ( todo )=>{
 
@@ -41,8 +42,14 @@ export const App = () => {
   }, [todosState])
   
 
-  const deleteTodo = ( id )=>{
+  const confirmDeleteTodo = ({ id, titulo })=>{
+    setTodoDelete({ id, titulo })
+  }
 
+  const handleDeleteTodo = ( id )=>{
+    setTodoDelete(null)
+    if(!id)return;
+    
     settodosState( {
       ...todosState,
       todos: todosState.todos.filter( ele => ele.id !== id ),
@@ -52,16 +59,20 @@ export const App = () => {
 
 
   return (
-    <div className='bg-gradient-to-t from-gray-200 to-gray-300 min-h-screen'>
-        <Header total={ todosState.total } > Task manager </Header>
-        <div className='main-content'> 
-            <Formulario addTodo={ addTodo } className='lg:w-[350px]' />
-            <GridCard 
-            todos = { todosState.todos }  
-            deleteTodo={ deleteTodo }
-            className='w-full min-h-[220px] flex-1 overflow-auto grid gap-3 grid-cols-[repeat(auto-fit,minmax(180px,1fr))]'/> 
-        </div>
+    <>
+      <div className='bg-gradient-to-t from-gray-200 to-gray-300 min-h-screen'>
+          <Header total={ todosState.total } > Task manager </Header>
+          <div className='main-content'> 
+              <Formulario addTodo={ addTodo } className='lg:w-[350px]' />
+              <GridCard 
+              todos = { todosState.todos }  
+              confirmDeleteTodo={ confirmDeleteTodo }
+              className='w-full min-h-[220px] flex-1 overflow-auto grid gap-3 grid-cols-[repeat(auto-fit,minmax(180px,1fr))]'/> 
+          </div>
+      </div>
 
-    </div>
+      { todoDelete && <WrapperConfirm  todoDelete= { todoDelete } handleDeleteTodo={ handleDeleteTodo } ></WrapperConfirm> }
+      
+    </>
   )
 }

@@ -6,7 +6,6 @@
     --heigh-header:  4rem;
 }
 
-
 @layer components{
     .header{
         @apply shadow-md bg-gray-700 text-gray-200 flex items-center;
@@ -26,5 +25,8 @@
 @layer utilities{
     .text-wrap{
         overflow-wrap: break-word;
+    }
+    .text-shadow{
+        text-shadow: 1px 1px  2px gray;
     }
 }
