@@ -1,6 +1,6 @@
 
 import logoMd from '../assets/logo-md.svg'
-import logoLg from '../assets/logo-lg.svg'
+import logoLg from '../assets/logo-md.svg'
 import icon from '../assets/icon32.svg'
 
 export const Header = ({ children, total }) => {
@@ -9,9 +9,9 @@ export const Header = ({ children, total }) => {
         <div className="container flex items-center justify-between">
             <div>
               <picture>
-                <source srcSet={ logoLg }  media="(min-width: 1024px)" />
-                <source srcSet={ logoMd }  media="(min-width: 768px)" />
-                <img src={ icon } alt="imagen-logo" />
+                <source srcSet={`./${logoLg}`} media="(min-width: 1024px)" />
+                <source srcSet={`./${logoMd}` }  media="(min-width: 768px)" />
+                <img src={`./${icon}`} alt="imagen-logo" />
               </picture>
             </div>
             <div className="flex">
