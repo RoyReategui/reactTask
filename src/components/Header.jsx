@@ -9,8 +9,8 @@ export const Header = ({ children, total }) => {
         <div className="container flex items-center justify-between">
             <div>
               <picture>
-                <source srcSet={`./${logoLg}`} media="(min-width: 1024px)" />
-                <source srcSet={`./${logoMd}` }  media="(min-width: 768px)" />
+                <source srcSet={`.${logoLg}`} media="(min-width: 1024px)" />
+                <source srcSet={`.${logoMd}` }  media="(min-width: 768px)" />
                 <img src={`./${icon}`} alt="imagen-logo" />
               </picture>
             </div>
