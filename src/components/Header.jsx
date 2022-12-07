@@ -11,7 +11,7 @@ export const Header = ({ children, total }) => {
               <picture>
                 <source srcSet={`.${logoLg}`} media="(min-width: 1024px)" />
                 <source srcSet={`.${logoMd}` }  media="(min-width: 768px)" />
-                <img src={`./${icon}`} alt="imagen-logo" />
+                <img src={`.${icon}`} alt="imagen-logo" />
               </picture>
             </div>
             <div className="flex">
